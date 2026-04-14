@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.Random;
+
 @NoArgsConstructor
 @Getter
 @Setter
@@ -21,8 +23,11 @@ public class BlogPost {
     //  private Author author;
 
     public BlogPost(Category category, String title, String content, int readingTime) {
+        Random random = new Random();
+        this.id = random.nextInt(1, 1000);
         this.category = category;
         this.title = title;
+        this.cover = this.cover = "https://ui-avatars.com/api/?name=" + title;
         this.content = content;
         this.readingTime = readingTime;
     }

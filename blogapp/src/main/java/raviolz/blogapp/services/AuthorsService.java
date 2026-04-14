@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import raviolz.blogapp.entities.Author;
 import raviolz.blogapp.exceptions.NotFoundException;
+import raviolz.blogapp.payloads.NewAuthorPayload;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,5 +27,11 @@ public class AuthorsService {
         }
 
         throw new NotFoundException("utente " + id + " non trovato");
+    }
+
+    public Author saveAuthor(NewAuthorPayload body) {
+        Author newAuthor = new Author(body.getName(), body.getSurname(), body.getEmail(), body.getDateOfBirth());
+        this.authorsDB.add(newAuthor);
+        return newAuthor; // restituisco oggetto intero creato non e' obbligatorio ma ok .. converte autonomamente in json
     }
 }

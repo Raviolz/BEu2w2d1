@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import raviolz.blogapp.entities.BlogPost;
 import raviolz.blogapp.exceptions.NotFoundException;
+import raviolz.blogapp.payloads.NewBlogPostPayload;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,5 +29,11 @@ public class BlogPostsService {
         }
 
         throw new NotFoundException("Post con id: " + id + " non trovato");
+    }
+
+    public BlogPost saveBlogPost(NewBlogPostPayload body) {
+        BlogPost newBlogPost = new BlogPost(body.getCategory(), body.getTitle(), body.getContent(), body.getReadingTime());
+        this.blogPostsDB.add(newBlogPost);
+        return newBlogPost;
     }
 }

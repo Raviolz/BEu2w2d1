@@ -1,11 +1,10 @@
 package raviolz.blogapp.controllers;
 
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 import raviolz.blogapp.entities.BlogPost;
+import raviolz.blogapp.payloads.NewBlogPostPayload;
 import raviolz.blogapp.services.BlogPostsService;
 
 import java.util.List;
@@ -29,5 +28,11 @@ public class BlogPostsController {
     @GetMapping("/{blogPostsId}")
     public BlogPost findById(@PathVariable long blogPostId) {
         return this.bpService.findById(blogPostId);
+    }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public BlogPost CreateBlogPost(@RequestBody NewBlogPostPayload body) {
+        return this.bpService.saveBlogPost(body);
     }
 }
