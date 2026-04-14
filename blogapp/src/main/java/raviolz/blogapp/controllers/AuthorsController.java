@@ -2,6 +2,7 @@ package raviolz.blogapp.controllers;
 
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import raviolz.blogapp.entities.Author;
@@ -21,9 +22,16 @@ public class AuthorsController {
         this.auService = auService;
     }
 
+
     @GetMapping
     // GET obv sa che parliamo di user non per il RequestMapping ma per il valore di ritorno dalla firma del metodo
     public List<Author> findAll() { // e'un altro metodo che ha dentro il metodo del service. Per get usa il metodo del service x
         return this.auService.findAll();
+    }
+
+
+    @GetMapping("/{authorId}")
+    public Author findById(@PathVariable long authorId) {
+        return this.auService.findById(authorId);
     }
 }
