@@ -10,7 +10,7 @@ import raviolz.blogapp.services.AuthorsService;
 import java.util.List;
 
 @RestController // gestisce richieste HTTP e restituisce risposte REST    .. collega http a java
-@RequestMapping("/authors")
+@RequestMapping("/authors") // per avere un path comune a tutti i metodi
 // partenza dell url (dopo base localhost ecc) .. metto classe di riferimento al plurale, per convenzione sensata
 public class AuthorsController {
 
@@ -41,4 +41,11 @@ public class AuthorsController {
     public Author createAuthor(@RequestBody NewAuthorPayload body) { // prende json in arrivo da richiesta e lo trasforma in oggetto NAutPayload
         return this.auService.saveAuthor(body);
     }
+
+
+    @PutMapping("/{authorId}")
+    public Author getAuthorByIdAndUpdate(@PathVariable long authorId, @RequestBody NewAuthorPayload body) {
+        return this.auService.findByIdAndUpdate(authorId, body);
+    }
 }
+// ricordo riguardo optional

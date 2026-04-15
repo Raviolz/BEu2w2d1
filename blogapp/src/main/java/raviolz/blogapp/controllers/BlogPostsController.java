@@ -25,7 +25,7 @@ public class BlogPostsController {
     }
 
 
-    @GetMapping("/{blogPostsId}")
+    @GetMapping("/{blogPostId}")
     public BlogPost findById(@PathVariable long blogPostId) {
         return this.bpService.findById(blogPostId);
     }
@@ -35,4 +35,11 @@ public class BlogPostsController {
     public BlogPost CreateBlogPost(@RequestBody NewBlogPostPayload body) {
         return this.bpService.saveBlogPost(body);
     }
+
+    @PutMapping("/{blogPostId}")
+    public BlogPost getUserByIdAndUpdate(@PathVariable long blogPostId, @RequestBody NewBlogPostPayload body) {
+        return this.bpService.findByIdAndUpdate(blogPostId, body);
+    }
+
+
 }

@@ -27,7 +27,7 @@ public class BlogPost {
         this.id = random.nextInt(1, 1000);
         this.category = category;
         this.title = title;
-        this.cover = this.cover = "https://ui-avatars.com/api/?name=" + title;
+        this.cover = this.cover = "https://ui-avatars.com/api/?name=";
         this.content = content;
         this.readingTime = readingTime;
     }

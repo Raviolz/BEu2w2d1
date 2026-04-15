@@ -34,4 +34,21 @@ public class AuthorsService {
         this.authorsDB.add(newAuthor);
         return newAuthor; // restituisco oggetto intero creato non e' obbligatorio ma ok .. converte autonomamente in json
     }
+
+
+    public Author findByIdAndUpdate(long authorId, NewAuthorPayload body) {
+        Author found = null;
+
+        for (Author author : authorsDB) {
+            if (author.getId() == authorId) {
+                found = author;
+                found.setName(body.getName());
+                found.setSurname(body.getSurname());
+                found.setEmail(body.getEmail());
+                found.setDateOfBirth(body.getDateOfBirth());
+            }
+        }
+        if (found == null) throw new NotFoundException("L autore con id: " + authorId + "non e' stato trovato");
+        return found;
+    }
 }

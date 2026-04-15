@@ -36,4 +36,20 @@ public class BlogPostsService {
         this.blogPostsDB.add(newBlogPost);
         return newBlogPost;
     }
+
+    public BlogPost findByIdAndUpdate(long blogPostId, NewBlogPostPayload body) {
+        BlogPost found = null;
+        for (BlogPost bp : blogPostsDB) {
+            if (bp.getId() == blogPostId) {
+                found = bp;
+                found.setCategory(body.getCategory());
+                found.setTitle(body.getTitle());
+                found.setContent(body.getContent());
+                found.setReadingTime(body.getReadingTime());
+            } // gli rimando quello aggiornato
+        }
+        if (found == null) throw new NotFoundException("Il posto con id: " + blogPostId + " non e' stato trovato");
+        return found;
+
+    }
 }
