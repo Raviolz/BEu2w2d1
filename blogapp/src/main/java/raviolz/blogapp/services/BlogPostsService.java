@@ -48,8 +48,23 @@ public class BlogPostsService {
                 found.setReadingTime(body.getReadingTime());
             } // gli rimando quello aggiornato
         }
-        if (found == null) throw new NotFoundException("Il posto con id: " + blogPostId + " non e' stato trovato");
+        if (found == null) throw new NotFoundException("Il post con id: " + blogPostId + " non e' stato trovato");
         return found;
 
     }
+
+    public void findByIdAndDelete(long blogPostId) {
+        BlogPost found = null;
+
+        for (BlogPost bp : blogPostsDB) {
+            if (bp.getId() == blogPostId) {
+                found = bp;
+            }
+        }
+
+        if (found == null) throw new NotFoundException("Il post con id: " + blogPostId + " non e' stato trovato");
+
+        this.blogPostsDB.remove(found);
+    }
 }
+

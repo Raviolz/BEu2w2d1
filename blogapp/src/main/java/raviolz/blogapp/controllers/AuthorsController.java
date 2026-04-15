@@ -47,5 +47,12 @@ public class AuthorsController {
     public Author getAuthorByIdAndUpdate(@PathVariable long authorId, @RequestBody NewAuthorPayload body) {
         return this.auService.findByIdAndUpdate(authorId, body);
     }
+
+    @DeleteMapping("/{authorId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteAuthor(@PathVariable long authorId) {
+        this.auService.findByIdAndDelete(authorId);
+    }
 }
+
 // ricordo riguardo optional

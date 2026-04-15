@@ -51,4 +51,13 @@ public class AuthorsService {
         if (found == null) throw new NotFoundException("L autore con id: " + authorId + "non e' stato trovato");
         return found;
     }
+
+    public void findByIdAndDelete(long authorId) {
+        Author found = null;
+        for (Author au : authorsDB) {
+            if (au.getId() == authorId) found = au;
+            if (found == null) throw new NotFoundException("L autore con id: " + authorId + "non e' stato trovato");
+            this.authorsDB.remove(au);
+        }
+    }
 }

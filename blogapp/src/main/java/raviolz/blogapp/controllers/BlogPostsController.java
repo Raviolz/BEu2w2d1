@@ -41,5 +41,11 @@ public class BlogPostsController {
         return this.bpService.findByIdAndUpdate(blogPostId, body);
     }
 
+    @DeleteMapping("/{blogPostId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteBlogPost(@PathVariable long blogPostId) {
+        this.bpService.findByIdAndDelete(blogPostId);
+    }
+
 
 }
